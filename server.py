@@ -18,12 +18,13 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return """<!doctype html><html><a href = "/hello">Click me to go to Hello</a>Hi! This is the home page. Testing 123</html>"""
 
 
 @app.route("/hello")
 def say_hello():
     """Say hello and prompt for user's name."""
+
 
     return """
     <!doctype html>
@@ -33,10 +34,25 @@ def say_hello():
       </head>
       <body>
         <h1>Hi There!</h1>
+
         <form action="/greet">
           What's your name? <input type="text" name="person">
+          <br>
+          <input type = "radio" name="compliments" value="awesome">
+          <label for="awesome">Awesome</label><br>
+          <input type = "radio" name="compliments" value="terrific">
+          <label for="terrific">Terrific</label><br>
+          <input type = "radio" name="compliments" value="neato">
+          <label for="neato">Neato</label><br>
+          <input type = "radio" name="compliments" value="spectacular">
+          <label for="spectacular">Spectacular</label><br>
+
+          <br>
           <input type="submit" value="Submit">
+
         </form>
+
+
       </body>
     </html>
     """
@@ -48,9 +64,9 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
 
-    y = x
+    compliment = request.args.get("compliments")
+
 
     return """
     <!doctype html>
@@ -68,4 +84,4 @@ def greet_person():
 if __name__ == "__main__":
     # debug=True gives us error messages in the browser and also "reloads"
     # our web app if we change the code.
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
